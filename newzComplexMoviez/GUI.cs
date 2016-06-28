@@ -44,14 +44,7 @@ namespace newzComplexMoviez
                 lstb_tmdbresults.Items.Add(movies[i].Title+" ("+datetime.Year+")");
 
                 movieBindingSource.Add(movies[i]);
-                 /*string[] row1 = { 
-                                   movies[i].ReleaseDate.ToString(),
-                                   movies[i].Id.ToString(),
-                                   movies[i].ImdbId
-                             };
-                 lst_tmdbresults.Items.Add(movies[i].Title).SubItems.AddRange(row1);*/
-
-
+                
                  i++;
             }
 
@@ -63,10 +56,14 @@ namespace newzComplexMoviez
         {
 
             int selectedrowindex = lst_tmdbresults.SelectedCells[0].RowIndex;
-
             DataGridViewRow selectedRow = lst_tmdbresults.Rows[selectedrowindex];
-            string a = Convert.ToString(selectedRow.Cells[1].Value);
-            txb_ncresults.Text = a;
+            string imdbid = Convert.ToString(selectedRow.Cells[1].Value);
+            imdbid = imdbid.TrimStart('t');
+            HTTPCom httpcom = new HTTPCom("http://www.newz-complex.org/www/api?imdbid=");
+
+
+            
+            txb_ncresults.Text = httpcom.GET(imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1");
         }
     }
 }
