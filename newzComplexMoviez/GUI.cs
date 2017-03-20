@@ -7,9 +7,11 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using TMDbLib.Client;
@@ -43,7 +45,7 @@ namespace newzComplexMoviez
                 Console.WriteLine(movies[i].Title);
                 DateTime datetime = movies[i].ReleaseDate.Value;
 
-                
+                 
 
                 lstb_tmdbresults.Items.Add(movies[i].Title+" ("+datetime.Year+")");
 
@@ -81,6 +83,17 @@ namespace newzComplexMoviez
                             Description = feed.Element("description").Value
 
                         };
+
+           
+            XmlReader reader = XmlReader.Create(httpcom.url + imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1");
+            SyndicationFeed feed = SyndicationFeed.Load(reader);
+            reader.Close();
+            foreach (SyndicationItem item in feed.Items)
+            {
+                String subject = item.Title.Text;
+                String summary = item.Summary.Text;
+                 
+}
 
             Console.WriteLine(httpcom.url + imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1");
 
