@@ -1,13 +1,17 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 using TMDbLib.Client;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.Movies;
@@ -63,7 +67,23 @@ namespace newzComplexMoviez
 
 
             
-            txb_ncresults.Text = httpcom.GET(imdbid + "&apikey=xxx&t=movie&extended=1");
+            txb_ncresults.Text = httpcom.GET(imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1");
+            Console.WriteLine(httpcom.url + imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1");
+
+            XDocument feedXML = XDocument.Load(httpcom.url + imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1");
+
+            var feeds = from feed in feedXML.Descendants("item")
+                        select new
+                        {
+                            Title = feed.Element("title").Value,
+                            Link = feed.Element("link").Value,
+                            Category = feed.Element("category").Value,
+                            Description = feed.Element("description").Value
+
+                        };
+
+            Console.WriteLine(httpcom.url + imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1");
+
         }
     }
 }

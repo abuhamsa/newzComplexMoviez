@@ -11,7 +11,7 @@ namespace newzComplexMoviez
     class HTTPCom
     {
 
-        private String url;
+        public String url;
 
         public HTTPCom(String m_url)
         {
