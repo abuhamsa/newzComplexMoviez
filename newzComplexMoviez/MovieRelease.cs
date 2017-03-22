@@ -13,6 +13,18 @@ namespace newzComplexMoviez
         private String category;
         private String description;
 
+        public MovieRelease(string nzbLink, string releaseName, string category, string description)
+        {
+            this.nzbLink = nzbLink;
+            this.releaseName = releaseName;
+            this.category = category;
+            this.description = description;
+        }
+
+        public MovieRelease()
+        {
+        }
+
         public string NzbLink
         {
             get

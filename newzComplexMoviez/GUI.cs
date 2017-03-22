@@ -1,19 +1,10 @@
 ﻿
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
+using System.ServiceModel;
 using System.ServiceModel.Syndication;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
-using System.Xml.Linq;
-using System.Xml.Serialization;
 using TMDbLib.Client;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.Movies;
@@ -72,31 +63,39 @@ namespace newzComplexMoviez
             txb_ncresults.Text = httpcom.GET(imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1");
             Console.WriteLine(httpcom.url + imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1");
 
-            XDocument feedXML = XDocument.Load(httpcom.url + imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1");
+            /*XDocument feedXML = XDocument.Load(httpcom.url + imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1");
 
-            var feeds = from feed in feedXML.Descendants("item")
+            var feeds = from feed1 in feedXML.Descendants("item")
                         select new
                         {
-                            Title = feed.Element("title").Value,
-                            Link = feed.Element("link").Value,
-                            Category = feed.Element("category").Value,
-                            Description = feed.Element("description").Value
+                            Title = feed1.Element("title").Value,
+                            Link = feed1.Element("link").Value,
+                            Category = feed1.Element("category").Value,
+                            Description = feed1.Element("description").Value
 
-                        };
+                        };*/
+            string url = httpcom.url + imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1";
+            XmlReader reader = XmlReader.Create(url);
+            SyndicationFeed feed =  SyndicationFeed.Load(reader);
 
-           
-            XmlReader reader = XmlReader.Create(httpcom.url + imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1");
-            SyndicationFeed feed = SyndicationFeed.Load(reader);
-            reader.Close();
+            List<MovieRelease> movieReleases = new List<MovieRelease>();
+
             foreach (SyndicationItem item in feed.Items)
             {
+
+                MovieRelease movieRelease = new MovieRelease();
+                //movieRelease.NzbLink()=
                 String subject = item.Title.Text;
                 String summary = item.Summary.Text;
-                 
-}
+                  
+            }
 
             Console.WriteLine(httpcom.url + imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1");
 
         }
+
+            
+
+        }
     }
-}
+
