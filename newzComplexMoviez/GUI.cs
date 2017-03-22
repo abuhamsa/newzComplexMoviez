@@ -1,10 +1,12 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Syndication;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Linq;
 using TMDbLib.Client;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.Movies;
@@ -56,12 +58,12 @@ namespace newzComplexMoviez
             DataGridViewRow selectedRow = lst_tmdbresults.Rows[selectedrowindex];
             string imdbid = Convert.ToString(selectedRow.Cells[1].Value);
             imdbid = imdbid.TrimStart('t');
-            HTTPCom httpcom = new HTTPCom("http://www.newz-complex.org/www/api?imdbid=");
+           HTTPCom httpcom = new HTTPCom("http://www.newz-complex.org/www/api?imdbid=");
 
 
             
-            txb_ncresults.Text = httpcom.GET(imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1");
-            Console.WriteLine(httpcom.url + imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1");
+           // txb_ncresults.Text = httpcom.GET(imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1");
+            //Console.WriteLine(httpcom.url + imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1");
 
             /*XDocument feedXML = XDocument.Load(httpcom.url + imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1");
 
@@ -75,27 +77,53 @@ namespace newzComplexMoviez
 
                         };*/
             string url = httpcom.url + imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1";
-            XmlReader reader = XmlReader.Create(url);
+            XmlReader reader = XmlReader.Create("api.xml");
             SyndicationFeed feed =  SyndicationFeed.Load(reader);
+
+
+
 
             List<MovieRelease> movieReleases = new List<MovieRelease>();
 
             foreach (SyndicationItem item in feed.Items)
             {
 
+                
                 MovieRelease movieRelease = new MovieRelease();
-                //movieRelease.NzbLink()=
-                String subject = item.Title.Text;
-                String summary = item.Summary.Text;
-                  
+                movieRelease.NzbLink = item.Links[0].Uri.ToString();
+                movieRelease.ReleaseName = item.Title.Text;
+                movieRelease.Description = item.Summary.Text;
+                movieRelease.Category = item.Categories[0].Name;
+          
+                movieReleases.Add(movieRelease);
+
             }
+
+            var xml = XDocument.Load("api.xml");
+
+            XNamespace ns = "http://www.newznab.com/DTD/2010/feeds/attributes/";
+            foreach (var item in xml.Descendants("item"))
+            {
+                Console.WriteLine(item.Element("title").Value);
+                //neue klasse machen für List
+                Console.WriteLine(item.Element(ns + "attr").Attribute("name").Value);
+
+                   // < newznab:attr name = "coverurl" value = "http://www.newz-complex.org/www/covers/movies/2277860-cover.jpg" />
+   
+
+
+            }
+
+
+
+
 
             Console.WriteLine(httpcom.url + imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1");
 
         }
 
-            
+        
 
-        }
+    }
     }
 

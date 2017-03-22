@@ -12,6 +12,9 @@ namespace newzComplexMoviez
         private String releaseName;
         private String category;
         private String description;
+        private String coverurl;
+    //<newznab:attr name = "coverurl" value="http://www.newz-complex.org/www/covers/movies/2277860-cover.jpg" />
+	//<newznab:attr name = "backdropurl" value="http://www.newz-complex.org/www/covers/movies/2277860-backdrop.jpg" />
 
         public MovieRelease(string nzbLink, string releaseName, string category, string description)
         {
@@ -74,6 +77,19 @@ namespace newzComplexMoviez
             set
             {
                 description = value;
+            }
+        }
+
+        public string Coverurl
+        {
+            get
+            {
+                return coverurl;
+            }
+
+            set
+            {
+                coverurl = value;
             }
         }
     }
