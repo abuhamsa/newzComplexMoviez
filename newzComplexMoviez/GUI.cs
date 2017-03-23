@@ -48,7 +48,7 @@ namespace newzComplexMoviez
             foreach (MovieRelease movieRelease in movieReleases)
             {
                 txb_ncresults.Text += movieRelease.ToString(false);
-               Console.WriteLine(movieRelease.ToString(false));
+               Console.WriteLine(movieRelease.ReleaseName);
 
             }
 

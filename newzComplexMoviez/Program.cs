@@ -1,4 +1,4 @@
-﻿using SQLite;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,6 @@ namespace newzComplexMoviez
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            
             Application.Run(new GUI());
             
         
