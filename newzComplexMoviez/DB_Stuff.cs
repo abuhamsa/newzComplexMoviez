@@ -13,9 +13,11 @@ namespace newzComplexMoviez
         public void createDB()
         {
 
-            SQLiteConnection.CreateFile
+            SQLiteConnection.CreateFile("newzComplexMoviez.sqlite");
 
         }
+
+        public 
 
 
 
