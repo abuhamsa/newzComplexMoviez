@@ -17,8 +17,7 @@ namespace newzComplexMoviez
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            MovieRelease_DB.connect();
+            
             Application.Run(new GUI());
             
         
