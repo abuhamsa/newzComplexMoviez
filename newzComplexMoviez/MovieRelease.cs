@@ -8,24 +8,31 @@ namespace newzComplexMoviez
 {
     class MovieRelease
     {
-        private String nzbLink;
         private String releaseName;
+        private String detailLink;
+        private String nzbLink;
         private String category;
         private String description;
-        private String coverurl;
-    //<newznab:attr name = "coverurl" value="http://www.newz-complex.org/www/covers/movies/2277860-cover.jpg" />
-	//<newznab:attr name = "backdropurl" value="http://www.newz-complex.org/www/covers/movies/2277860-backdrop.jpg" />
+        private List<ReleaseAttribute> attributes = new List<ReleaseAttribute>();
+        private int score;
+        private Boolean perfect;
 
-        public MovieRelease(string nzbLink, string releaseName, string category, string description)
-        {
-            this.nzbLink = nzbLink;
-            this.releaseName = releaseName;
-            this.category = category;
-            this.description = description;
-        }
+      
 
         public MovieRelease()
         {
+        }
+
+        public MovieRelease(string releaseName, string detailLink, string nzbLink, string category, string description, List<ReleaseAttribute> attributes, int score, bool perfect)
+        {
+            this.releaseName = releaseName;
+            this.detailLink = detailLink;
+            this.nzbLink = nzbLink;
+            this.category = category;
+            this.description = description;
+            this.attributes = attributes;
+            this.score = score;
+            this.perfect = perfect;
         }
 
         public string NzbLink
@@ -80,17 +87,124 @@ namespace newzComplexMoviez
             }
         }
 
-        public string Coverurl
+        public string DetailLink
         {
             get
             {
-                return coverurl;
+                return detailLink;
             }
 
             set
             {
-                coverurl = value;
+                detailLink = value;
             }
         }
+
+        internal List<ReleaseAttribute> Attributes
+        {
+            get
+            {
+                return attributes;
+            }
+
+            set
+            {
+                attributes = value;
+            }
+        }
+
+        public int Score
+        {
+            get
+            {
+                return score;
+            }
+
+            set
+            {
+                score = value;
+            }
+        }
+
+        public bool Perfect
+        {
+            get
+            {
+                return perfect;
+            }
+
+            set
+            {
+                perfect = value;
+            }
+        }
+
+        public string ToString(Boolean attribute_bl)
+        {
+            string movieReleaseString;
+
+            movieReleaseString = "Releasename: " + releaseName + "\r\r\n";
+            movieReleaseString += "Detail-Link: " + detailLink + "\r\n";
+            movieReleaseString += "NZB-Link: " + nzbLink + "\r\n";
+            movieReleaseString += "Category: " + category + "\r\n";
+            movieReleaseString += "Description: " + description + "\r\n";
+            movieReleaseString += "Score: " + score + "\r\n";
+
+
+            if (attribute_bl)
+            {
+                movieReleaseString += "-------------------------ATTRIBUTES-------------------------\r\n";
+                foreach (ReleaseAttribute releaseAttribute in this.Attributes)
+                {
+                    movieReleaseString += releaseAttribute.AttributeName + ": " + releaseAttribute.AttributeValue + "\r\n";
+
+                }
+                movieReleaseString += "-------------------------ATTRIBUTES-------------------------\r\n";
+            }
+            movieReleaseString += "\r\n";
+                return movieReleaseString;
+        }
+
+        public int scoring()
+        {
+            List<String> positivestrings = new List<string>();
+            List<String> negativstrings = new List<string>();
+
+            positivestrings.Add("DTS");
+            positivestrings.Add("BluRay");
+            positivestrings.Add("ENCOUNTERS");
+
+            negativstrings.Add("AC3");
+            negativstrings.Add("WebHD");
+            negativstrings.Add("PsO");
+            
+            int posscore= 0;
+            int negscore = 0;
+            int total = 0;
+            
+            foreach (string positivstring in positivestrings)
+            {
+                if (this.releaseName.Contains(positivstring))
+                {
+                    posscore = posscore + 10;
+                }
+            }
+
+            foreach (string negativstring in negativstrings)
+            {
+                if (this.releaseName.Contains(negativstring))
+                {
+                    negscore = negscore + 10;
+                }
+            }
+
+            total = posscore - negscore;
+            Console.WriteLine("Releasename: " + this.releaseName);
+            Console.WriteLine("Positiv: "+ posscore);
+            Console.WriteLine("Negativ: " + negscore);
+            Console.WriteLine("Total: " + total);
+            return posscore - negscore;
+        }
+
     }
 }

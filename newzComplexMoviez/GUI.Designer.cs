@@ -35,7 +35,6 @@
             this.btn_searchtmdb = new System.Windows.Forms.Button();
             this.lstb_tmdbresults = new System.Windows.Forms.ListBox();
             this.lst_tmdbresults = new System.Windows.Forms.DataGridView();
-            this.movieBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.imdbIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,6 +66,7 @@
             this.reviewsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.listsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.accountStatesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.movieBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.lst_tmdbresults)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.movieBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -93,7 +93,8 @@
             this.txb_ncresults.Location = new System.Drawing.Point(33, 241);
             this.txb_ncresults.Multiline = true;
             this.txb_ncresults.Name = "txb_ncresults";
-            this.txb_ncresults.Size = new System.Drawing.Size(454, 120);
+            this.txb_ncresults.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txb_ncresults.Size = new System.Drawing.Size(1115, 120);
             this.txb_ncresults.TabIndex = 3;
             // 
             // btn_searchtmdb
@@ -155,12 +156,8 @@
             this.lst_tmdbresults.Location = new System.Drawing.Point(33, 55);
             this.lst_tmdbresults.Name = "lst_tmdbresults";
             this.lst_tmdbresults.ReadOnly = true;
-            this.lst_tmdbresults.Size = new System.Drawing.Size(513, 150);
+            this.lst_tmdbresults.Size = new System.Drawing.Size(1115, 150);
             this.lst_tmdbresults.TabIndex = 6;
-            // 
-            // movieBindingSource
-            // 
-            this.movieBindingSource.DataSource = typeof(TMDbLib.Objects.Movies.Movie);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -379,11 +376,15 @@
             this.accountStatesDataGridViewTextBoxColumn.Name = "accountStatesDataGridViewTextBoxColumn";
             this.accountStatesDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // movieBindingSource
+            // 
+            this.movieBindingSource.DataSource = typeof(TMDbLib.Objects.Movies.Movie);
+            // 
             // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(576, 451);
+            this.ClientSize = new System.Drawing.Size(1181, 451);
             this.Controls.Add(this.lst_tmdbresults);
             this.Controls.Add(this.lstb_tmdbresults);
             this.Controls.Add(this.btn_searchtmdb);

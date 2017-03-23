@@ -18,5 +18,8 @@ namespace newzComplexMoviez
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new GUI());
         }
+
+
+
     }
 }
