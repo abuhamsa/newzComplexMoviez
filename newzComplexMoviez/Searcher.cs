@@ -38,7 +38,7 @@ namespace newzComplexMoviez
         {
             imdbid = imdbid.TrimStart('t');
             string baseurl = "http://www.newz-complex.org/www/api?imdbid=";
-            string url = baseurl + imdbid + "&apikey=51e3a2d1d949c66b54431708b8eec49e&t=movie&extended=1";
+            string url = baseurl + imdbid + "&apikey=xxxe&t=movie&extended=1";
 
 
             List<MovieRelease> movieReleases = new List<MovieRelease>();
