@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace newzComplexMoviez
 {
+    //OLDER OWN CLASS FOR MAKING HTTP CALLS OVER POST OR GET
+    //TODO: TAKE A CLOSER LOOK IF THIS IS STILL WORKING
+    //TODO: DOCUMENTING THIS STUFF
     class HTTPCom
     {
 

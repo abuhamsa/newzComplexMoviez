@@ -16,6 +16,13 @@ namespace newzComplexMoviez
         private List<ReleaseAttribute> attributes = new List<ReleaseAttribute>();
         private int score;
         private Boolean perfect;
+        private String multi_language;
+        private String audio_source;
+        private String auto_type;
+        private String resolution;
+        private String video_source;
+        private String video_codec;
+        private String group;
 
       
 
@@ -23,6 +30,7 @@ namespace newzComplexMoviez
         {
         }
 
+        //CONSTRUCTOR1
         public MovieRelease(string releaseName, string detailLink, string nzbLink, string category, string description, List<ReleaseAttribute> attributes, int score, bool perfect)
         {
             this.releaseName = releaseName;
@@ -35,6 +43,27 @@ namespace newzComplexMoviez
             this.perfect = perfect;
         }
 
+        //CONSTRUCTOR2
+        public MovieRelease(string releaseName, string detailLink, string nzbLink, string category, string description, List<ReleaseAttribute> attributes, int score, bool perfect, string multi_language, string audio_source, string auto_type, string resolution, string video_source, string video_codec, string group)
+        {
+            this.releaseName = releaseName;
+            this.detailLink = detailLink;
+            this.nzbLink = nzbLink;
+            this.category = category;
+            this.description = description;
+            this.attributes = attributes;
+            this.score = score;
+            this.perfect = perfect;
+            this.multi_language = multi_language;
+            this.audio_source = audio_source;
+            this.auto_type = auto_type;
+            this.resolution = resolution;
+            this.video_source = video_source;
+            this.video_codec = video_codec;
+            this.group = group;
+        }
+
+        //GETTER AND SETTER
         public string NzbLink
         {
             get
@@ -139,6 +168,17 @@ namespace newzComplexMoviez
             }
         }
 
+        public string Multi_language { get => multi_language; set => multi_language = value; }
+        public string Audio_source { get => audio_source; set => audio_source = value; }
+        public string Auto_type { get => auto_type; set => auto_type = value; }
+        public string Resolution { get => resolution; set => resolution = value; }
+        public string Video_source { get => video_source; set => video_source = value; }
+        public string Video_codec { get => video_codec; set => video_codec = value; }
+        public string Group { get => group; set => group = value; }
+
+
+
+        //OVERWRITTEN TOSTRING 
         public string ToString(Boolean attribute_bl)
         {
             string movieReleaseString;
@@ -165,46 +205,9 @@ namespace newzComplexMoviez
                 return movieReleaseString;
         }
 
-        public int scoring()
-        {
-            List<String> positivestrings = new List<string>();
-            List<String> negativstrings = new List<string>();
 
-            positivestrings.Add("DTS");
-            positivestrings.Add("BluRay");
-            positivestrings.Add("ENCOUNTERS");
 
-            negativstrings.Add("AC3");
-            negativstrings.Add("WebHD");
-            negativstrings.Add("PsO");
-            
-            int posscore= 0;
-            int negscore = 0;
-            int total = 0;
-            
-            foreach (string positivstring in positivestrings)
-            {
-                if (this.releaseName.Contains(positivstring))
-                {
-                    posscore = posscore + 10;
-                }
-            }
-
-            foreach (string negativstring in negativstrings)
-            {
-                if (this.releaseName.Contains(negativstring))
-                {
-                    negscore = negscore + 10;
-                }
-            }
-
-            total = posscore - negscore;
-            Console.WriteLine("Releasename: " + this.releaseName);
-            Console.WriteLine("Positiv: "+ posscore);
-            Console.WriteLine("Negativ: " + negscore);
-            Console.WriteLine("Total: " + total);
-            return posscore - negscore;
-        }
+        
 
     }
 }
