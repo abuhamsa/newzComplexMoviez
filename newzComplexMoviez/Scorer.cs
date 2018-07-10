@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,11 +14,12 @@ namespace newzComplexMoviez
         //TODO: CREATE THIS FROM A CONFIGFILE SO THAT ITS NO LONGER HARDCODED
         public List<ScoringAttributesCollector> CreateScroringAttributeCollectors()
         {
-            List<ScoringAttributesCollector> scoringAttributesCollectors = new List<ScoringAttributesCollector>();
+            string scroringjson = File.ReadAllText("C:\\Users\\reberja\\Documents\\newzComplexMoviez\\scoring.json");
+            //List<ScoringAttributesCollector> scoringAttributesCollectors = new List<ScoringAttributesCollector>();
+            List<ScoringAttributesCollector> scoringAttributesCollectors = JsonConvert.DeserializeObject<List<ScoringAttributesCollector>>(scroringjson);
 
-            
             //CREATES COLLECTOR FOR RESOLUTION
-            List<ScoringAttribute> scoringAttributesResolution = new List<ScoringAttribute>();
+            /*List<ScoringAttribute> scoringAttributesResolution = new List<ScoringAttribute>();
             ScoringAttribute resolution1080p = new ScoringAttribute("1080p", 300000);
             ScoringAttribute resolution720p = new ScoringAttribute("720p", 200000);
             scoringAttributesResolution.Add(resolution1080p);
@@ -33,18 +36,22 @@ namespace newzComplexMoviez
             ScoringAttributesCollector scoringAttributesCollectorVideo = new ScoringAttributesCollector("VideoSource", scoringAttributesVideoSource, 10000);
             scoringAttributesCollectors.Add(scoringAttributesCollectorVideo);
 
-            
+            string test = JsonConvert.SerializeObject(scoringAttributesCollectors);
+            File.WriteAllText("C:\\Users\\reberja\\Documents\\tuttibot\\test.json", test);*/
+
             return scoringAttributesCollectors;
 
         }
 
         // CALCULATE THE SCORE FOR A MOVIERELEASE WITH SCORINGATTRIBUTES
-        public int CalculateScore(List<ScoringAttributesCollector> scoringAttributesCollectors,MovieRelease movieRelease)
+        public List<Score> CalculateScore(List<ScoringAttributesCollector> scoringAttributesCollectors,MovieRelease movieRelease)
         {
             //INITIAL SCORE IS 0
-            int score = 0;
+            List<Score> scorelist = new List<Score>();
             foreach (ScoringAttributesCollector collector in scoringAttributesCollectors)
             {
+                Score score = new Score();
+                score.Scoringtype = collector.scroringType;
                 foreach (ScoringAttribute attribute in collector.scoringAttributes)
                 {
                     {
@@ -52,11 +59,9 @@ namespace newzComplexMoviez
                         if (collector.scored==false && movieRelease.ReleaseName.Contains(attribute.RatingString))
                         {
                             collector.scored = true;
-                            score += attribute.RatingScore;
-
-                            //SOME DEBUG-WRITELINES
-                            Console.WriteLine("Releasename: " + movieRelease.ReleaseName);
-                            Console.WriteLine(collector.scroringType+"Score: " + attribute.RatingScore);
+                            score.Ratingstring = attribute.RatingString;
+                            score.Scoreint = attribute.RatingScore;
+                            
                         }
                     }
                 }
@@ -64,19 +69,27 @@ namespace newzComplexMoviez
                 if (collector.scored == false)
                 {
                     collector.scored = true;
-                    score += collector.other_nothing;
-
-                    //SOME DEBUG-WRITELINES
-                    Console.WriteLine("Releasename: " + movieRelease.ReleaseName);
-                    Console.WriteLine(collector.scroringType + "Score: " + collector.other_nothing);
+                    score.Ratingstring = "None";
+                    score.Scoreint = collector.other_nothing;
+                    
                     
                 }
+                scorelist.Add(score);
             }
-            //SOME DEBUG-WRITELINE
-            Console.WriteLine("TotalScore: " + score);
 
-            return score;
+            return scorelist;
         }
         
+
+        public int GetTotalScore (MovieRelease movieRelease)
+        {
+            int scoreint = 0;
+            foreach (Score score in movieRelease.Scorelist)
+            {
+                scoreint += score.Scoreint;
+            }
+
+            return scoreint;
+        }
     }
 }

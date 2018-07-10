@@ -106,6 +106,7 @@
       <DependentUpon>GUI.cs</DependentUpon>
     </Compile>
     <Compile Include="HTTPCom.cs" />
+    <Compile Include="Score.cs" />
     <Compile Include="Scorer.cs" />
     <Compile Include="ScoringAttribute.cs" />
     <Compile Include="ScoringAttributesCollector.cs" />
@@ -129,6 +130,7 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\DataSources\MovieRelease.datasource" />
     <None Include="Properties\DataSources\TMDbLib.Objects.Movies.Movie.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

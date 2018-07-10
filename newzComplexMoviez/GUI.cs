@@ -1,7 +1,9 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Syndication;
 using System.Windows.Forms;
@@ -24,6 +26,7 @@ namespace newzComplexMoviez
         //THIS HAPPENS IF YOU CLICK THE "Search TMBD"-BUTTON
         private void btn_searchtmdb_Click(object sender, EventArgs e)
         {
+            movieBindingSource.Clear();
             //CREATES A NEW SEARCHER
             Searcher searcher = new Searcher();
             //SEARCHES  TMDB WITH STRING FROM SEARCHFIELD
@@ -44,12 +47,13 @@ namespace newzComplexMoviez
         //THIS HAPPENS IF YOU CLICK THE "Search NewzComplex"-BUTTON
         private void btn_searchnc_Click(object sender, EventArgs e)
         {
+            movieReleaseBindingSource.Clear();
             //CREATES A NEW SEARCHER
             Searcher searcher = new Searcher();
             //GET IMDBID FROM SELECTED TABLEENTRY
             int selectedrowindex = lst_tmdbresults.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = lst_tmdbresults.Rows[selectedrowindex];
-            string imdbid = Convert.ToString(selectedRow.Cells[1].Value);
+            string imdbid = Convert.ToString(selectedRow.Cells[0].Value);
 
             //SEARCHES THE MOVIE IN NEWZCOMPLEX
             //TODO: THIS IS A DUMMY METHOD ATM
@@ -57,8 +61,10 @@ namespace newzComplexMoviez
 
             foreach (MovieRelease movieRelease in movieReleases)
             {
-               //CREATES OUTPUT IN THE TEXTAREA
-               txb_ncresults.Text += movieRelease.ToString(false);
+
+                movieReleaseBindingSource.Add(movieRelease);
+                //CREATES OUTPUT IN THE TEXTAREA
+                txb_ncresults.Text += movieRelease.ToString(false,true);
 
                //SOME DEBUG WRITELINES
                Console.WriteLine(movieRelease.ReleaseName);
@@ -68,8 +74,21 @@ namespace newzComplexMoviez
 
         }
 
-        
+        private void btn_send2sab_Click(object sender, EventArgs e)
+        {
+            int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
+            string nzblink = Convert.ToString(selectedRow.Cells[0].Value);
 
+            nzblink = WebUtility.UrlEncode(nzblink);
+            string sabnzbd_url = "http://admin.hochzeit-reber.ch:8080/api?output=text&apikey=XXXXXXXXXXXXXXXXXXXXX";
+
+            HTTPCom hTTPCom = new HTTPCom(sabnzbd_url);
+
+            string method = "&mode=addurl&name=" + nzblink + "&nzbname=&cat=*&script=Default&priority=-100&pp=-1";
+
+            hTTPCom.GET(method);
+        }
     }
     }
 
