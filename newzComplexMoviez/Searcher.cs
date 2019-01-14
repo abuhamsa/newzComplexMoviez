@@ -162,11 +162,27 @@ namespace newzComplexMoviez
                 //FOR THE TAG "ATTRIBUTES" WE NEEDED SOMESPECIAL TREATS
                 foreach (var attribute in item.Elements(ns + "attr"))
                 {
+                    if (attribute.Attribute("name").Value == "guid"){
+                        movieRelease.Guid = attribute.Attribute("value").Value;
+                    };
+
+                    if (attribute.Attribute("name").Value == "imdb")
+                    {
+                        movieRelease.Imdb = Int32.Parse(attribute.Attribute("value").Value);
+                    };
+
+                    if (attribute.Attribute("name").Value == "imdbtitle")
+                    {
+                        movieRelease.Imdbtitle = attribute.Attribute("value").Value;
+                    };
 
                     ReleaseAttribute releaseAttribute = new ReleaseAttribute(
                         attribute.Attribute("name").Value,
                         attribute.Attribute("value").Value);
                     movieRelease.Attributes.Add(releaseAttribute);
+
+                    
+                        
 
                 }
 

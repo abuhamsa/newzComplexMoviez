@@ -47,6 +47,8 @@
             this.alternativeTitlesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.movieBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btn_send2sab = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.nzbLinkDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.releaseNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.categoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,8 +56,6 @@
             this.detailLinkDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.scoreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.movieReleaseBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btn_send2sab = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lst_tmdbresults)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.movieBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -221,6 +221,26 @@
             this.dataGridView1.Size = new System.Drawing.Size(1046, 272);
             this.dataGridView1.TabIndex = 7;
             // 
+            // btn_send2sab
+            // 
+            this.btn_send2sab.Location = new System.Drawing.Point(33, 520);
+            this.btn_send2sab.Name = "btn_send2sab";
+            this.btn_send2sab.Size = new System.Drawing.Size(187, 23);
+            this.btn_send2sab.TabIndex = 8;
+            this.btn_send2sab.Text = "Send to Sabnzb";
+            this.btn_send2sab.UseVisualStyleBackColor = true;
+            this.btn_send2sab.Click += new System.EventHandler(this.btn_send2sab_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(381, 24);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // nzbLinkDataGridViewTextBoxColumn
             // 
             this.nzbLinkDataGridViewTextBoxColumn.DataPropertyName = "NzbLink";
@@ -260,26 +280,6 @@
             // movieReleaseBindingSource
             // 
             this.movieReleaseBindingSource.DataSource = typeof(newzComplexMoviez.MovieRelease);
-            // 
-            // btn_send2sab
-            // 
-            this.btn_send2sab.Location = new System.Drawing.Point(33, 520);
-            this.btn_send2sab.Name = "btn_send2sab";
-            this.btn_send2sab.Size = new System.Drawing.Size(187, 23);
-            this.btn_send2sab.TabIndex = 8;
-            this.btn_send2sab.Text = "Send to Sabnzb";
-            this.btn_send2sab.UseVisualStyleBackColor = true;
-            this.btn_send2sab.Click += new System.EventHandler(this.btn_send2sab_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(381, 24);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // GUI
             // 

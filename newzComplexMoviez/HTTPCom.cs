@@ -26,7 +26,7 @@ namespace newzComplexMoviez
 
         public string POST(string m_postData, string method)
         {
-
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             var request = (HttpWebRequest)WebRequest.Create(url + method);
 
             var postData = m_postData;
@@ -51,6 +51,7 @@ namespace newzComplexMoviez
 
         public string GET(string method)
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             var request = (HttpWebRequest)WebRequest.Create(url + method);
 
             var response = (HttpWebResponse)request.GetResponse();

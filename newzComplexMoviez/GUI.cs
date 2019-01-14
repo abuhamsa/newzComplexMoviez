@@ -83,7 +83,7 @@ namespace newzComplexMoviez
             string nzblink = Convert.ToString(selectedRow.Cells[0].Value);
 
             nzblink = WebUtility.UrlEncode(nzblink);
-            string sabnzbd_url = "http://admin.hochzeit-reber.ch:8080/api?output=text&apikey=XXXXXXXXXXXXXXXXXXXXX";
+            string sabnzbd_url = "https://sab.hochzeit-reber.ch/api?output=text&apikey=64a0adb814ff5fb49c7963012a9a53f0";
 
             HTTPCom hTTPCom = new HTTPCom(sabnzbd_url);
 
