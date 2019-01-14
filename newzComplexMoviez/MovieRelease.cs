@@ -16,6 +16,9 @@ namespace newzComplexMoviez
         private List<ReleaseAttribute> attributes = new List<ReleaseAttribute>();
         private int score;
         private List<Score> scorelist;
+        private int imdb;
+        private String imdbtitle;
+        private String guid;
 
               
 
@@ -141,6 +144,9 @@ namespace newzComplexMoviez
         }
 
         internal List<Score> Scorelist { get => scorelist; set => scorelist = value; }
+        public int Imdb { get => imdb; set => imdb = value; }
+        public string Imdbtitle { get => imdbtitle; set => imdbtitle = value; }
+        public string Guid { get => guid; set => guid = value; }
 
 
 

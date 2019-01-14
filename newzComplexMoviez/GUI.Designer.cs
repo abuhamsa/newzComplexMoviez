@@ -35,7 +35,6 @@
             this.btn_searchtmdb = new System.Windows.Forms.Button();
             this.lstb_tmdbresults = new System.Windows.Forms.ListBox();
             this.lst_tmdbresults = new System.Windows.Forms.DataGridView();
-            this.movieBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.imdbIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.originalTitleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,6 +45,7 @@
             this.popularityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.voteAverageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.alternativeTitlesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.movieBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.nzbLinkDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.releaseNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,6 +55,7 @@
             this.scoreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.movieReleaseBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btn_send2sab = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lst_tmdbresults)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.movieBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -128,10 +129,6 @@
             this.lst_tmdbresults.Size = new System.Drawing.Size(1046, 150);
             this.lst_tmdbresults.TabIndex = 6;
             // 
-            // movieBindingSource
-            // 
-            this.movieBindingSource.DataSource = typeof(TMDbLib.Objects.Movies.Movie);
-            // 
             // imdbIdDataGridViewTextBoxColumn
             // 
             this.imdbIdDataGridViewTextBoxColumn.DataPropertyName = "ImdbId";
@@ -202,6 +199,10 @@
             this.alternativeTitlesDataGridViewTextBoxColumn.Name = "alternativeTitlesDataGridViewTextBoxColumn";
             this.alternativeTitlesDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // movieBindingSource
+            // 
+            this.movieBindingSource.DataSource = typeof(TMDbLib.Objects.Movies.Movie);
+            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToOrderColumns = true;
@@ -270,11 +271,22 @@
             this.btn_send2sab.UseVisualStyleBackColor = true;
             this.btn_send2sab.Click += new System.EventHandler(this.btn_send2sab_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(381, 24);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1106, 760);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_send2sab);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.lst_tmdbresults);
@@ -330,6 +342,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn scoreDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource movieReleaseBindingSource;
         private System.Windows.Forms.Button btn_send2sab;
+        private System.Windows.Forms.Button button1;
     }
 }
 

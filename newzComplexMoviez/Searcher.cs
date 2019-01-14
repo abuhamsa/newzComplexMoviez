@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,8 +38,7 @@ namespace newzComplexMoviez
            return movies;
         }
 
-        // SEARCH IN NEWZCOMPLEX WITH THE IMDB-ID
-        // TODO: ADD LIVE SUPPORT / REMOVE STATIC API.XML
+        //STATIC METHOD TO SAVE APICALLS
         public List<MovieRelease> searchNewzStatic (string imdbid)
         {
             //REMOVE THE "t" FROM THE IMDB-ID
@@ -87,39 +87,56 @@ namespace newzComplexMoviez
 
                 }
 
+                foreach (ReleaseAttribute releaseAtttribute in movieRelease.Attributes)
+                {
+                    if (releaseAtttribute.AttributeName == "imdb")
+                    {
+                        movieRelease.Imdb = Int32.Parse(releaseAtttribute.AttributeValue);
+                    }
+                    if (releaseAtttribute.AttributeName == "imdbtitle")
+                    {
+                        movieRelease.Imdbtitle = releaseAtttribute.AttributeValue;
+                    }
+                    if (releaseAtttribute.AttributeName == "guid")
+                    {
+                        movieRelease.Guid = releaseAtttribute.AttributeValue;
+                    }
+                }
+
+
                 //FOR SETTING THE SCORE OF A MOVIERELEASE WE NEED A NEW OBJECT (SCORER)
                 Scorer scorer = new Scorer();
 
                 //THE LOGIC OF THE CALCULATING IS IN THE SCORER-CLASS
                 movieRelease.Scorelist = scorer.CalculateScore(scorer.CreateScroringAttributeCollectors(), movieRelease);
                 movieRelease.Score = scorer.GetTotalScore(movieRelease);
-                
+
                 //ADD MOVIERELEASE-OBJECT TO LIST
+                string jsontemp = JsonConvert.SerializeObject(movieRelease);
                 movieReleases.Add(movieRelease);
 
             }
+            
             return movieReleases;
         }
 
-
+        // SEARCH IN NEWZCOMPLEX WITH THE IMDB-ID
         public List<MovieRelease> searchNewz(string imdbid)
         {
             //REMOVE THE "t" FROM THE IMDB-ID
             imdbid = imdbid.TrimStart('t');
 
             //TODO: BASEURL SHOULD BE IN CONFIG
-            //TODO: BASEURL IS WRONG ATM
             string baseurl = "http://www.newz-complex.org/www/api?imdbid=";
 
             //SETTING URL TOGETHER
             //TODO APIKEY SHOULD BE IN CONFIG
-            string url = baseurl + imdbid + "&apikey=xxxxxxxxxxxxxxxxx&t=movie&extended=1";
+            string url = baseurl + imdbid + "&apikey=ea023be22a2573de7a5eb60eb5923e27&t=movie&extended=1";
 
             //CREATE OWN MOVIERELEASES-LIST
             List<MovieRelease> movieReleases = new List<MovieRelease>();
 
-            //LOAD LOCAL STATIC API.XML
-            //TODO: HERE I SHOULD LOAD THE XML FROM THE ACTUAL API
+            //LOAD LOAD XML FROM API
             HTTPCom hTTPCom = new HTTPCom(url);
 
             string xmlstring = hTTPCom.GET("");
@@ -164,6 +181,7 @@ namespace newzComplexMoviez
                 movieReleases.Add(movieRelease);
 
             }
+            string jsontemp = JsonConvert.SerializeObject(movieReleases);
             return movieReleases;
         }
 

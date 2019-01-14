@@ -69,6 +69,8 @@ namespace newzComplexMoviez
                //SOME DEBUG WRITELINES
                Console.WriteLine(movieRelease.ReleaseName);
 
+                DB.release2db(movieRelease);
+
             }
 
 
@@ -88,6 +90,11 @@ namespace newzComplexMoviez
             string method = "&mode=addurl&name=" + nzblink + "&nzbname=&cat=*&script=Default&priority=-100&pp=-1";
 
             hTTPCom.GET(method);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DB.db_create();
         }
     }
     }
