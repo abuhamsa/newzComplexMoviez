@@ -59,6 +59,8 @@ namespace newzComplexMoviez
             //TODO: THIS IS A DUMMY METHOD ATM
             List<MovieRelease> movieReleases = searcher.searchNewz(imdbid);
 
+            DB db = new DB("C:\\Users\\reberja\\Documents\\newzComplexMoviez\\releases.sqlite", "CREATE TABLE MovieRelease (NzbLink VARCHAR(150) NOT NULL,ReleaseName VARCHAR(100) NOT NULL,Category VARCHAR(50) NOT NULL,Description VARCHAR(100) NOT NULL,DetailLink VARCHAR(100) NOT NULL,Score DOUBLE NOT NULL,Imdb DOUBLE NOT NULL,Imdbtitle VARCHAR(50) NOT NULL,Guid VARCHAR(100) NOT NULL, PRIMARY KEY (Guid))");
+
             foreach (MovieRelease movieRelease in movieReleases)
             {
 
@@ -68,8 +70,9 @@ namespace newzComplexMoviez
 
                //SOME DEBUG WRITELINES
                Console.WriteLine(movieRelease.ReleaseName);
+                
 
-                DB.release2db(movieRelease);
+                db.release2db(movieRelease);
 
             }
 
@@ -92,10 +95,7 @@ namespace newzComplexMoviez
             hTTPCom.GET(method);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            DB.db_create();
-        }
+       
     }
     }
 
