@@ -95,7 +95,12 @@ namespace newzComplexMoviez
             hTTPCom.GET(method);
         }
 
-       
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
+            Console.WriteLine(Convert.ToString(selectedRow.Cells[0].Value));
+        }
     }
     }
 

@@ -47,6 +47,7 @@
             this.alternativeTitlesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.movieBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btn_send2sab = new System.Windows.Forms.Button();
             this.nzbLinkDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.releaseNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.categoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,11 +55,12 @@
             this.detailLinkDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.scoreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.movieReleaseBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btn_send2sab = new System.Windows.Forms.Button();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             ((System.ComponentModel.ISupportInitialize)(this.lst_tmdbresults)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.movieBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.movieReleaseBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtb_moviename
@@ -219,6 +221,17 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(1046, 272);
             this.dataGridView1.TabIndex = 7;
+            this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // btn_send2sab
+            // 
+            this.btn_send2sab.Location = new System.Drawing.Point(33, 520);
+            this.btn_send2sab.Name = "btn_send2sab";
+            this.btn_send2sab.Size = new System.Drawing.Size(187, 23);
+            this.btn_send2sab.TabIndex = 8;
+            this.btn_send2sab.Text = "Send to Sabnzb";
+            this.btn_send2sab.UseVisualStyleBackColor = true;
+            this.btn_send2sab.Click += new System.EventHandler(this.btn_send2sab_Click);
             // 
             // nzbLinkDataGridViewTextBoxColumn
             // 
@@ -259,16 +272,12 @@
             // movieReleaseBindingSource
             // 
             this.movieReleaseBindingSource.DataSource = typeof(newzComplexMoviez.MovieRelease);
+            this.movieReleaseBindingSource.Sort = "";
             // 
-            // btn_send2sab
+            // fileSystemWatcher1
             // 
-            this.btn_send2sab.Location = new System.Drawing.Point(33, 520);
-            this.btn_send2sab.Name = "btn_send2sab";
-            this.btn_send2sab.Size = new System.Drawing.Size(187, 23);
-            this.btn_send2sab.TabIndex = 8;
-            this.btn_send2sab.Text = "Send to Sabnzb";
-            this.btn_send2sab.UseVisualStyleBackColor = true;
-            this.btn_send2sab.Click += new System.EventHandler(this.btn_send2sab_Click);
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
             // 
             // GUI
             // 
@@ -289,6 +298,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.movieBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.movieReleaseBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -330,6 +340,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn scoreDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource movieReleaseBindingSource;
         private System.Windows.Forms.Button btn_send2sab;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
     }
 }
 
