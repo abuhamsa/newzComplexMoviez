@@ -21,7 +21,7 @@ namespace newzComplexMoviez
         {
             //APIKEY
             //TODO: REMOVE HARDCODED APIKEY
-            TMDbClient client = new TMDbClient("d1ad8f91ddab03ecbf80e5ca265fb453");
+            TMDbClient client = new TMDbClient("xxxxxxx");
 
             //SEARCHCONTAINER AND SEARCHMOVIE ARE CLASSES FROM TMDBLib
             SearchContainer<SearchMovie> results = client.SearchMovie(searchString);
